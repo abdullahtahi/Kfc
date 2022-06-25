@@ -1,0 +1,22 @@
+const express = require('express')
+var cors = require('cors')
+const product=require("./routes/product/Product")
+const user=require("./routes/user/User")
+const order=require('./routes/order/order')
+const category=require('./routes/Category/Category')
+const connectDB=require("./connectDb/connectDB")
+var cookieParser = require('cookie-parser')
+const app = express()
+var bodyParser = require('body-parser')
+const port=5000;
+connectDB();
+
+app.use(express.json())
+app.use(cookieParser())
+app.use(cors())
+app.use(bodyParser.json())
+app.use("/collection",product)
+app.use("/apis",user)
+app.use("/api",order)
+app.use("/category",category)
+app.listen(port,()=>console.log("hello abdullah, I am server ,I am using a port 5000.thanks"))
